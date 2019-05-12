@@ -1,0 +1,56 @@
+<% include ./head %>
+<code><% h.dump(user) %></code>
+
+<h4 class="center">Welcome to <span style="color: rgb(5, 57, 100); font-weight: bolder"><%= h.siteName %></span></h4>
+<div id='map' style='width: 100%; height: 900px; display: none;'></div>
+<script>
+    
+
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: 51.5074,
+                lng: 0.1278,
+            },
+            zoom: 8
+        });
+        // addMarkers(<%-  h.dump(coordinates) || [] %>)
+    }
+    // var marker = new google.maps.Marker({
+    //     position: {
+    //         lat: 51.5074,
+    //         lng: 0.1278,
+    //     },
+    //     map: map
+    // });
+    function templateHtml(event) {
+        var text = '<div class="card">' +
+            '<div class="card-body">' +
+            '<h5 class="card-title">' + event.title + '</h5>' +
+            'Check out the party at <a href="/events/' + event.slug + '">' + event.title + ' </a>.' +
+            '</div>' +
+            '</div>'
+        return text;
+    }
+    // The map() method here has nothing to do with the Google Maps API.
+    function addMarkers(locations) {
+        var locations = locations || [];
+        var markers = locations.map(function (location, i) {
+            var infowindow = new google.maps.InfoWindow({
+                content: templateHtml(location),
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+            return marker;
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers);
+    }
+</script>
+<% include ./last %>

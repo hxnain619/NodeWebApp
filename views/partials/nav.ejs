@@ -1,0 +1,158 @@
+<nav style="background: white !important ">
+    <div class="nav-wrapper">
+        <div class="row"
+        style="margin-bottom: 0 "
+        >
+            <a href="#" style="color: rgb(5, 57, 100);" class="sidenav-trigger waves-effect waves-light"
+                data-target="mobile-demo">
+                <i class="material-icons">menu</i>
+            </a>
+            <a class="brand-logo" href="/"
+                style="color: rgb(5, 57, 100); letter-spacing: 5px; margin-left: 30px; font-weight: bold ">
+
+                <h5><%- h.siteName %> </h5>
+            </a>
+            <a href="#" id="search_input">
+            </a>
+            <ul id="nav-mobile" style="width: 45%" class="right hide-on-med-and-down container">
+                <li>
+                    <a class=" waves-effect waves-light" href="/">
+                        Home 
+                    </a>
+                </li>
+
+                <% if (user) { %>
+                <li>
+                    <a class=" waves-effect waves-light" href="/event/add">
+                        Add Event  
+                    </a>
+                </li>
+
+                <% } %>
+                <li>
+                    <a class=" waves-effect waves-light" href="/event">
+                        Events 
+                    </a>
+                </li>
+                <li>
+                    <a class=" waves-effect waves-light" href="/contact">
+                        Contact Us 
+                    </a>
+                </li>
+            </ul>
+            <!-- Side Bar -->
+            <ul id="mobile-demo" style="width: 45%" class="sidenav">
+                <li>
+                    <a class=" waves-effect waves-light" href="/">
+                        Home 
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a class=" waves-effect waves-light" href="/event">
+                        Events 
+                    </a>
+                </li>
+                <li>
+                    <a class=" waves-effect waves-light" href="/contact">
+                        Contact Us 
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- Another Nav -->
+        <div class="upper-nav">
+            <div className="row ">
+                <ul>
+                    <% if (user) { %>
+                    <li> &nbsp; Hi !!,
+                        <span id="link1" style=" color: rgb(5, 57, 100);; padding-left: 5px ">
+                             <%- user.username %>
+                        </span>
+                        &nbsp; or
+                        <span id="link2" style=" color: rgb(5, 57, 100); padding-left: 5px ">
+                            Sign Out </span>
+
+                    </li>
+                    <% } %>
+                    <% if (!user) { %>
+
+                    <li>&nbsp; Hi ,
+                        <span id="link3" style="color: rgb(5, 57, 100); padding-left: 5px "> Sign In</span>
+
+                        &nbsp; or
+                        <span id="link4" style=" color: rgb(5, 57, 100);padding-left: 5px ">Register</span>
+                    </li>
+                    <% } %>
+                </ul>
+                
+                <div class="search_space">
+                    <a href="#" id="search_map" style=" float: right ; padding-right: 20">
+                    </a>
+                    <div class="search_results" style="z-index: 238;right: 10px; position: fixed;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<script>
+
+    const ChangePath = (path) => {
+        
+        window.location.href = `http://localhost:3002/${path}`
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var link1 = document.getElementById("link1");
+        var link2 = document.getElementById("link2");
+        var link3 = document.getElementById("link3");
+        var link4 = document.getElementById("link4");
+
+        if (link1) {
+            link1.addEventListener('click', (e) => ChangePath("user"))
+            link2.addEventListener('click', (e) => ChangePath("logout"))
+        }
+        if (link3) {
+            link3.addEventListener('click', (e) => ChangePath("login"))
+            link4.addEventListener('click', (e) => ChangePath("signup"))
+        }
+    });
+
+    window.onload = () => {
+
+        var logo = document.getElementsByClassName("brand-logo")[0].firstElementChild;
+        var search = document.getElementById("search_input");
+        var search2 = document.getElementById("search_map");
+        var input = document.createElement("input");
+        var input2 = document.createElement("input");
+
+        input.setAttribute("class", "search-form col m2 l2 right");
+        input.setAttribute("placeholder", "Search Content");
+        input.setAttribute("type", "search");
+        input.setAttribute("aria-label", "Search");
+
+        input2.setAttribute("class", "search-form col m2 l2 right");
+        input2.setAttribute("placeholder", "Search Area");
+        input2.setAttribute("type", "search");
+        input2.setAttribute("aria-label", "Search");
+
+        if (window.innerWidth > 0 || window.innerWidth <= 1500) {
+            logo.setAttribute("id", "nav-logo")
+        } else {
+            logo.setAttribute("id", "nav-logo-sm")
+        }
+
+        if (window.innerWidth > 712) {
+            search.appendChild(input);
+            search2.appendChild(input2);
+        }
+    }
+</script>

@@ -1,0 +1,14 @@
+<% include ./head %>
+<div class="row">
+        <div class="col s12 m12 l12">
+                <div class="right"><a href="/event/add">Add a new Event+</a></div><br>
+                <div id="card" style="padding: 10px">
+                        <% events.forEach(function(event) { %>
+                        <%- include('./event/_com', {event: event}); %>
+                        <% }) %>
+                </div>
+        </div>
+</div>
+</div>
+
+<% include ./last %>

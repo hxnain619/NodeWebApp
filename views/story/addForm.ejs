@@ -1,0 +1,21 @@
+<% if(flashes.length > 0) {%>
+    <span>Flash</span>
+    <code><%- flashes.toString() %></code>
+    
+    <% } %>
+    <form id="addstoryForm" name="addstoryForm" action="/event/add" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Title</label> -->
+            <input type="text" class="form-control" id="exampleInputtext1" required name="text"
+                aria-describedby="textHelp" placeholder="Write what's happening">
+        </div>
+        <div class="form-group">
+            <label for="desc">Description</label>
+            <textarea type="text" class="form-control" name="desc" id="desc" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="photos">Photos</label>
+            <input type="file" name="photos" id="photos" multiple accept="image/gif, image/png, image/jpeg" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

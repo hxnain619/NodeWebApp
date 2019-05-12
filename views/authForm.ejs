@@ -1,0 +1,42 @@
+<!-- <form action="/signup" method="POST">
+<div class="form-group">
+        <label for="exampleInputEmail1">Email</label>
+        <input required type="emial" class="form-control" name="email" aria-describedby="UsernameHelp"
+            placeholder="Email">
+        <small id="UsernameHelp" class="form-text text-muted">Enter your email.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input required type="Username" class="form-control" id="exampleInputUsername1" name="username" aria-describedby="UsernameHelp"
+            placeholder="Enter Username">
+        <small id="UsernameHelp" class="form-text text-muted">Enter your username.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input required type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form> -->
+<div class="center">
+    <div class="container">
+        <div class="row">
+            <div class="popup-form  card col s8 m8 l8">
+                <span class="heading">
+                    <h3>Sign Up
+                    </h3>
+                </span>
+                <form action="/signup" method="POST">
+                    <input class="col s12 m12 l12 profile-name" name="username" id="exampleInputUsername1" type="text"
+                        placeholder="Enter Username" required />
+                    <input class="col s12 m12 l12 signUp-email" name='email' id="exampleInputEmail1" type="email"
+                        placeholder="Enter Email" required />
+                    <input class="col s12 m12 l12 signUp-pass" name="password" id="exampleInputPassword1"
+                        type="password" placeholder="Enter Password" required />
+                    <button type="submit" class="btn btn-large btn-primary pop-btn col s12 m12 l12">Sign Up</button>
+                </form>
+                <br />
+                <span>Already A Member ? <a href="/login">Sign In</a></span>
+            </div>
+        </div>
+    </div>
+</div>

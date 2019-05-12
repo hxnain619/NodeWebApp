@@ -1,0 +1,45 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var card = document.getElementById("card");
+
+        if (window.innerWidth <= 320) {
+            card.innerHTML += `
+            <div class="card">
+                <div class="card-image">
+        <img style="height: auto; width: 100%" src="/images/uploads/<%= event.photos[event.photos.length - 1] %>"
+            alt='' />
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <h4><%= event.title %></h4>
+            <p><%= event.desc %> </p>
+        </div>
+        <div class="card-action">
+            <a class="left" href="/events/<%= event.slug %>">Show Me</a>
+            <a href="#"><small class="right">Created : <%= event.e_time %></small></a>
+
+        </div>
+    </div>
+</div>
+`} else {
+            card.innerHTML += `
+    <div class="card horizontal">
+    <div class="card-image">
+        <img style="height: auto; width: 10rem" src="/images/uploads/<%= event.photos[event.photos.length - 1] %>"
+            alt='' />
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <h4><%= event.title %></h4>
+            <p><%= event.desc %> </p>
+        </div>
+        <div class="card-action">
+            <a class="left" href="/events/<%= event.slug %>">Show Me</a>
+            <a href="#"><small class="right">Created : <%= event.e_time %></small></a>
+
+        </div>
+    </div>
+</div>`
+        }
+    })
+</script>

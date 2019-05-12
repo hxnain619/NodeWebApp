@@ -1,0 +1,164 @@
+<% include ../head %>
+<div class="container">
+    <h4 class="center"> Events </h4>
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-image">
+                    <% event.photos.forEach(function(photo) { %>
+                    <img src="/images/uploads/<%= photo %>" alt="<%= photo %>">
+                    <% }) %>
+                </div>
+                <div class="divider"></div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <h6 style="font-weight: bold; text-transform: capitalize"><%= event.title %></h6>
+                    </div>
+                    <p><%= event.desc && event.desc.length !== 0 ? event.desc : 'no description here' %></p>
+                    <div class="divider"></div>
+                    <small class="left">Created By : <%= event.author.username %></small>
+                    <small class="right">Created At: <%= event.e_time %></small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <% if (event.stories.length > 0) { %>
+    <h4>Stories</h4>
+    <div class="divider"></div>
+    <div class="row">
+        <form method="POST" action='/events/my-event'>
+            <% event.stories.forEach(function(story, num){ %>
+            <div class="col s12 m6 l4">
+                <div class="card <%= story.id %>">
+                    <div class="card-image">
+                        <div class="divider"></div>
+                        <% if(story.photos.length > 1) { %>
+                        <div class="carousel carousel-slider">
+                            <% story.photos.forEach(function(photo, num) { %>
+                                <a class="carousel-item" href="#<% num %>"> <img src="/images/uploads/<%= photo %>"></a>
+                            <% }) %>
+                        </div>
+                        <% } %>
+                        <% if(story.photos.length > 0 && story.photos.length < 2) { %>
+                        <% story.photos.forEach(function(photo) { %>
+                         <img src="/images/uploads/<%= photo %>">
+                        <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="card-content">
+                        <p><%= story.text && story.text.length !== 0 ? story.text : 'Story Photo' %></p>
+                        <small class="right">Author: <%= story.author.username %></small>
+                        <% if(user && user.id == event.author.id) { %>
+                        <div class="card-action">
+                            <button data-delete_id="<%= story._id %>" type="submit"
+                                class="deleteevent btn btn-large btn-primary del-btn col s12 m12 l12">Delete</button>
+                        </div>
+                        <% }%>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </form>
+    </div>
+</div>
+
+<% } %>
+
+<!-- <% if(user) {  %> -->
+<!-- <% } %> -->
+
+<div class="row">
+    <div class="col s12 m12 l12">
+        <a href="#addStoryModal" class="btn btn-large modal-trigger btn-primary pop-btn left col s12 m8 l8">
+            Add Story!
+        </a>
+        <a href="#liveStoryModal" class="btn btn-large btn-primary modal-trigger pop-btn right del-btn  col s12 m3 l3">
+            Add Photo!
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="modal" id="liveStoryModal" style="padding: 10px">
+            <form method="POST" action="/events/my-event" id="addStory" name="addStory" enctype="multipart/form-data">
+
+                <div class="modal-content ">
+                    <h4>Add Live Story! <i class="material-icons modal-close right">close</i></h4>
+                    <div class="modal-body">
+
+                        <div class="app">
+                            <video id="camera_stream" autoplay></video>
+                            <canvas></canvas>
+                            <img src="" alt="" class="photo">
+                            <button id="takePicture" class="btn btn-large btn-primary cam-btn col s12 m4 l4 left">
+                                <i class="material-icons">add_a_photo</i>
+                                Take Picture
+                            </button>
+                            <button id="screenshot" class="btn btn-large btn-primary ss-btn col s12 m4 l4 right">
+                                <i class="material-icons">camera</i>
+                                ScreenShot
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn btn-large btn-primary pop-btn col s12 m5 l5 modal-close">Close</button>
+                        <button class="btn btn-large btn-primary pop-btn col s12 m5 l5 "
+                            id="sendLivePhoto">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Add Story Modal ... -->
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="modal" style="padding: 10px" id="addStoryModal">
+                <form method="POST" action="/events/my-event" id="addStory" name="addStory"
+                    enctype="multipart/form-data">
+
+                    <div class="modal-content">
+
+                        <h4 class="modal-title" id="addStoryModalLabel">Modal title
+                            <i class="material-icons modal-close right">close</i>
+                        </h4>
+                        <div class="modal-body">
+                            <h6 class="center">Add your story here!</h6>
+
+                            <label for="desc">Description</label>
+                            <textarea class="form-control" name="text" id="desc"
+                                placeholder="Write what's happening"></textarea>
+                            <div class="file-field input-field">
+                                <div class="btn btn-large btn-primary pop-btn">
+                                    <span>Photos</span>
+                                    <input type="file" name="photos" id="photos" multiple
+                                        accept="image/gif, image/png, image/jpeg">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" readonly placeholder="Uplaod Photos">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"
+                                class="btn btn-large btn-primary pop-btn col s12 m5 l5 modal-close">Close</button>
+                            <button type="submit" class="btn btn-large btn-primary pop-btn col s12 m5 l5"
+                                id="sendStoryData">Send</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modal');
+        var elems2 = document.querySelectorAll('.carousel');
+        var instances = M.Modal.init(elems);
+        var instances2 = M.Modal.init(elems2);
+    });
+
+</script>
+<% include ../last %>
