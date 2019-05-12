@@ -1,0 +1,10 @@
+
+@mixin paddingLeftRight ($left,$right){
+    padding-left:$left;
+    padding-right: $right;
+}
+
+@mixin setXPosition($left,$right){
+    left:$left;
+    right: $right;
+}

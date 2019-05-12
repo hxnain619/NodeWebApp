@@ -1,0 +1,14 @@
+
+@import 'partials/globalStyles' ;
+
+header{
+    height:45%;
+    position: relative;
+    background:url('../../images/login-cover.jpg') center / cover no-repeat;
+}
+
+@media only screen and (max-height:600px) and (orientation:landscape){
+    header{
+        height: 55%;
+    }
+}

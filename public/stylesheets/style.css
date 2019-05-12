@@ -1,0 +1,57 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 100%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.event{
+    height: 50px;
+}
+.event>.title {
+    text-transform: uppercase;
+    color: tomato;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.photos {
+    display: flex;
+    max-height: 250px;
+    max-width: 100%;
+    flex: 1;
+
+}
+.photos img {
+    flex: 1;
+    width: 33.3333333%;
+    max-width: 100%;
+
+}
+
+
+.app canvas{
+    display: none;
+}
+
+#camera_stream, .app img {
+    max-width: 100%;
+}
